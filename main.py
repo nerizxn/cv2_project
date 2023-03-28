@@ -40,6 +40,12 @@ def carton(account):
     update_account = (account, records)
     cur.execute("INSERT or REPLACE into users VALUES (?, ?);", update_account)
     connection.commit()
+    single("sortingtrash/main",
+           payload=f'На аккаунт {account} был зачислен 1 балл. Баланс:{records}',
+           hostname='mqtt.pi40.ru',
+           port=1883,
+           client_id='python_qw21',
+           auth={'username':'sortingtrash','password':'e122333'})
     song = "carton.wav"
 
 
@@ -55,6 +61,12 @@ def plastic(account):
     update_account = (account, records)
     cur.execute("INSERT or REPLACE into users VALUES (?, ?);", update_account)
     connection.commit()
+    single("sortingtrash/main",
+           payload=f'На аккаунт {account} было зачислено 2 балла. Баланс:{records}',
+           hostname='mqtt.pi40.ru',
+           port=1883,
+           client_id='python_qw21',
+           auth={'username':'sortingtrash','password':'e122333'})
     song = "plastic.wav"
 
 
@@ -70,7 +82,7 @@ def glass(account):
     cur.execute("INSERT or REPLACE into users VALUES (?, ?);", update_account)
     connection.commit()
     single("sortingtrash/main",
-           payload='Картон',
+           payload=f'На аккаунт {account} было зачислено 3 балла. Баланс:{records}',
            hostname='mqtt.pi40.ru',
            port=1883,
            client_id='python_qw21',
