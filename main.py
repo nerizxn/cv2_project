@@ -112,14 +112,16 @@ while key == -1:
         loginned_account = account
     if loginned:
         blue, green, red = image[240, 320]
+        print(blue, green, red)
         if 130 < blue < 170 and 180 < green < 210 and 180 < red < 200:
             carton(loginned_account)
-        if blue < 40 and green < 40 and red > 150:
+        if blue < 80 and green < 80 and red > 150:
             plastic(loginned_account)
         if blue < 60 and 50 < green < 90 and red < 40:
             glass(loginned_account)
     else:
         cv2.putText(image, "Для начала Вам нужно войти.", (170, 200), cv2.FONT_HERSHEY_COMPLEX, 0.6, (20, 20, 255), 1)
+    cv2.circle(image, (320, 240), 20, (255, 255, 255), 2)
     cv2.imshow("Sorting", image)
     key = cv2.waitKey(20)
     if song != "":
