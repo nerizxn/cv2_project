@@ -90,6 +90,13 @@ def glass(account_id):
     song = "glass.wav"
 
 
+def auxiliary_sound(sound):
+    try:
+        playsound(sound)
+    except:
+        print("Ошибка проигрывания звука", end="\t")
+
+
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 key = -1
 song = ""
@@ -112,7 +119,7 @@ while key == -1:
         loginned_account = account
     if loginned:
         blue, green, red = image[240, 320]
-        print(blue, green, red)
+        # print(blue, green, red)
         if 130 < blue < 170 and 180 < green < 210 and 180 < red < 200:
             carton(loginned_account)
         if blue < 80 and green < 80 and red > 150:
@@ -125,10 +132,7 @@ while key == -1:
     cv2.imshow("Sorting", image)
     key = cv2.waitKey(20)
     if song != "":
-        try:
-            playsound(song)
-        except:
-            print("Ошибка проигрывания звука", end="\t")
+        auxiliary_sound(song)
 cap.release()
 cursor.execute("SELECT * FROM users;")
 all_results = cursor.fetchall()
